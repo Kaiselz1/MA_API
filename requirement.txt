@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+passlib==1.7.4
+bcrypt==3.2.2
+pydantic[email]
+python-jose
+python-multipart
+fastapi-utils
+typing-inspect
