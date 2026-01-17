@@ -7,7 +7,7 @@ from fastapi import UploadFile, HTTPException, status
 ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/svg+xml"]
 BASE_IMAGE_PATH = "static/images"
 DEFAULT_IMAGE_NAME = "no_image.jpg"
-DEFAULT_IMAGE_PATH = "/static/images/{DEFAULT_IMAGE_NAME}"
+DEFAULT_IMAGE_PATH = f"/static/images/{DEFAULT_IMAGE_NAME}"
 
 def save_image(image: Optional[UploadFile], sub_folder: str = "") -> str:
     """
@@ -38,7 +38,7 @@ def save_image(image: Optional[UploadFile], sub_folder: str = "") -> str:
 
 
 
-def delete_image(image_url: str, host_base_url: Optional[str] = None):
+def delete_image(image_url: str, sub_folder: Optional[str] = None, host_base_url: Optional[str] = None):
     """
     Delete an image from disk. Ignores default image.
     If host_base_url is provided, remove it from the URL to get the local path.
@@ -46,14 +46,23 @@ def delete_image(image_url: str, host_base_url: Optional[str] = None):
     if not image_url or DEFAULT_IMAGE_NAME in image_url:
         return  # Do not delete default image
 
-    # Convert full URL to local path if host_base_url is given
+    # Remove host part if full URL
     if host_base_url and image_url.startswith(host_base_url):
-        image_path = image_url.replace(host_base_url.rstrip("/"), ".")
-    else:
-        image_path = "." + image_url  # relative path
+        image_path = image_url[len(host_base_url):]
 
-    if os.path.exists(image_path):
-        os.remove(image_path)
+    # Ensure relative path
+    if image_url.startswith("/"):
+        image_url = image_url[1:]  # remove leading /
+
+    # Compose full path to file
+    file_path = os.path.join(BASE_IMAGE_PATH, image_url.split(f"{BASE_IMAGE_PATH}/")[-1])
+
+    # Delete file if exists
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        print(f"Deleted image: {file_path}")
+    else:
+        print(f"File not found: {file_path}")
 
 
 
