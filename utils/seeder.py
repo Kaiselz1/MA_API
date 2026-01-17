@@ -35,7 +35,7 @@ categories = [
     {
         "name": "Food & Snacks", 
         "description": "Tasty bites, pastries, and light snacks for anytime.",
-        "image_url": "http://127.0.0.1:8000/static/images/categories/food_snacks.svg"
+        "image_url": "http://127.0.0.1:8000/static/images/categories/food_snack.svg"
     },
 ]
 
