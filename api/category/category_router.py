@@ -6,7 +6,7 @@ from utils.image_handler import save_image, delete_image, replace_image
 from api.category import category_schema, category_model
 
 router = APIRouter(
-    prefix='/category',
+    prefix='/categories',
     tags=['Category']
 )
 

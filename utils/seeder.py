@@ -244,7 +244,7 @@ products = [
         "name": "Blueberry Tart", 
         "description": "Sweet tart with fresh blueberries", 
         "price": 3.0,
-        "image_url": "http://127.0.0.1:8000/static/images/products/Blueberry_Tart.jpg", 
+        "image_url": "http://127.0.0.1:8000/static/images/products/Blueberry_Tart.jpeg", 
         "category_id": 6
     },
     {
