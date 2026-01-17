@@ -1,10 +1,28 @@
-command to run
+# MA API Setup Guide
 
-for dependencies
-pip install -r 'requirement.txt'
+Follow these steps to get the project running locally.
 
-for seeder/data
-python -m utils.seeder
+---
 
-for running the api
+## Install Dependencies
+
+Make sure you have Python installed, then install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Run App if no DB
+
+Make sure you have Python installed, then install the required packages:
+```bash
 uvicorn main:app --reload
+```
+
+## For seeder
+
+Make sure you have Python installed, then install the required packages:
+
+```bash
+python -m utils.seeder
+```
