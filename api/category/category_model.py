@@ -8,6 +8,7 @@ class Category(base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, nullable=False)
     description = Column(String, nullable=True)
+    image_url = Column(String, unique=True, nullable=True)
     # figure out later on
     # total_products = Column(Integer, default=0)
 

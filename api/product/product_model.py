@@ -10,7 +10,7 @@ class Product(base):
     description = Column(String, nullable=True)
     price = Column(Float, nullable=False)
     image_url = Column(String, unique=True, nullable=True)
-    category_id = Column(String, ForeignKey('categories.id'), nullable=False)
+    category_id = Column(Integer, ForeignKey('categories.id'), nullable=False)
 
     category = relationship("Category", back_populates="products")
 

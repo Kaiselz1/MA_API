@@ -6,8 +6,13 @@ class Product(BaseModel):
     price: float
     category_id: int
 
-class ShowProduct(Product):
+class ShowProduct(BaseModel):
+    id: int
+    name: str
+    description: str
+    price: float
     image_url: HttpUrl
+    category_name: str
 
     class Config:{
         'from_attribute': True

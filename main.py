@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi_utils.tasks import repeat_every
 from fastapi.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
 from config.database import engine, get_db
 from api.user import user_router, user_model as model
 from api.auth import auth_router
@@ -10,6 +11,15 @@ from api.category import category_router
 from utils import token_cleanup
 
 app = FastAPI(title="MA API", debug=True)
+
+# Enable for Cross-Origin Resource Sharing (CORS)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins for testing
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods (POST, GET, OPTIONS...)
+    allow_headers=["*"],  # Allow all headers
+)
 
 @app.get("/")
 def root():
