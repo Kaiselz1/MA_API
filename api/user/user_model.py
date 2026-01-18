@@ -1,6 +1,3 @@
-# Add these fields to your existing User model
-# If you already have a User model, just add the phone and address columns
-
 from sqlalchemy import Column, Integer, String
 from config.database import base
 
@@ -11,3 +8,5 @@ class User(base):
     username = Column(String, nullable=False)
     email = Column(String, unique=True, index=True, nullable=False)
     password = Column(String, nullable=False)
+    phone = Column(String, nullable=True, default='')
+    address = Column(String, nullable=True, default='')
