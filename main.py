@@ -29,7 +29,7 @@ def root():
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # making the table
-model.base.metadata.create_all(engine)
+model.User.metadata.create_all(engine)
 
 # Token Cleanup Task
 @app.on_event("startup")
