@@ -2,9 +2,9 @@
 # If you already have a User model, just add the phone and address columns
 
 from sqlalchemy import Column, Integer, String
-from config.database import Base
+from config.database import base
 
-class User(Base):
+class User(base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
