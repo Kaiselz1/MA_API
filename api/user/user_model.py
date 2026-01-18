@@ -11,8 +11,3 @@ class User(Base):
     username = Column(String, nullable=False)
     email = Column(String, unique=True, index=True, nullable=False)
     password = Column(String, nullable=False)
-    
-    # Add these new fields for the profile
-    phone = Column(String, nullable=True, default='')
-    address = Column(String, nullable=True, default='')
-    
