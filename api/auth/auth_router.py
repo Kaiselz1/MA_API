@@ -5,7 +5,7 @@ from config.database import get_db
 from config.security import hash
 from config import token, oauth2
 from ..auth import auth_schema
-from ..user import user_model
+from ..user import user_model, user_schema
 from ..auth import token_model
 from datetime import datetime
 
@@ -60,7 +60,7 @@ def validate_token(current_user: user_model.User = Depends(oauth2.get_current_us
     return {"valid": True, "email": current_user.email}
 
 # Get Current User Info
-@router.get("/me", status_code=status.HTTP_200_OK, response_model=auth_schema.UserSignup)
+@router.get("/me", status_code=status.HTTP_200_OK, response_model=user_schema.User)
 def get_current_user_info(current_user: user_model.User = Depends(oauth2.get_current_user)):
     return current_user
 

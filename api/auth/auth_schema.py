@@ -3,6 +3,8 @@ from typing import Optional
 
 #bro did not put password in the signup 🗿
 
+#thx you bro
+
 # Schema for user registration (input)
 class UserSignupRequest(BaseModel):
     username: str

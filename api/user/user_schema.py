@@ -4,6 +4,8 @@ class User(BaseModel):
     username: str
     email: EmailStr
     password: str
+    phone: str | None = ''
+    address: str | None = ''
 
 class ShowUser(BaseModel):
     username: str
