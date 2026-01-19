@@ -8,7 +8,7 @@ from api.user import user_model, user_schema
 
 router = APIRouter(
     prefix="/users", 
-    tags=["Users"]
+    tags=["User"]
 )
 
 # Create User
