@@ -9,6 +9,7 @@ from api.auth import auth_router
 from api.product import product_router
 from api.category import category_router
 from utils import token_cleanup
+from api.favorite import favorite_routes 
 
 app = FastAPI(title="MA API", debug=True)
 
@@ -43,3 +44,4 @@ app.include_router(auth_router.router)
 app.include_router(product_router.router)
 app.include_router(category_router.router)
 app.include_router(user_router.router)
+app.include_router(favorite_routes.router)
