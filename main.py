@@ -8,6 +8,7 @@ from api.user import user_router, user_model as model
 from api.auth import auth_router
 from api.product import product_router
 from api.category import category_router
+from api.order import order_router
 from utils import token_cleanup
 
 app = FastAPI(title="MA API", debug=True)
@@ -43,3 +44,4 @@ app.include_router(auth_router.router)
 app.include_router(product_router.router)
 app.include_router(category_router.router)
 app.include_router(user_router.router)
+app.include_router(order_router.router)
