@@ -84,3 +84,64 @@ def logout(token_data: str = Depends(oauth2.oauth2_scheme), db: Session = Depend
     db.add(blacklisted_token)
     db.commit()
     return {"msg": "Logout successful. Please delete the token on the client side."}
+
+
+@router.get("/profile", status_code=status.HTTP_200_OK, response_model=auth_schema.UserProfileResponse)
+def get_profile(
+    current_user: user_model.User = Depends(oauth2.get_current_user)
+):
+    print("Fetching profile for user:", current_user.email)
+    return {
+        "name": current_user.username,  # Assuming username maps to name
+        "email": current_user.email,
+        "phone": getattr(current_user, 'phone', ''),
+        "address": getattr(current_user, 'address', '')
+    }
+
+
+# Update User Profile
+@router.put("/profile", status_code=status.HTTP_200_OK, response_model=auth_schema.UserProfileResponse)
+def update_profile(
+    request: auth_schema.UserProfileUpdateRequest, 
+    db: Session = Depends(get_db),
+    current_user: user_model.User = Depends(oauth2.get_current_user)
+):
+    # Check if email is being changed and if it's already taken by another user
+    if request.email != current_user.email:
+        existing_user = db.query(user_model.User).filter(
+            user_model.User.email == request.email,
+            user_model.User.id != current_user.id
+        ).first()
+        if existing_user:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Email already registered"
+            )
+    
+    # Update user fields
+    current_user.username = request.name
+    current_user.email = request.email
+    
+    # Update phone and address if these fields exist in your User model
+    # If they don't exist, you'll need to add them to your user_model.User
+    if hasattr(current_user, 'phone'):
+        current_user.phone = request.phone
+    if hasattr(current_user, 'address'):
+        current_user.address = request.address
+    
+    try:
+        db.commit()
+        db.refresh(current_user)
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to update profile"
+        )
+    
+    return {
+        "name": current_user.username,
+        "email": current_user.email,
+        "phone": getattr(current_user, 'phone', ''),
+        "address": getattr(current_user, 'address', '')
+    }
