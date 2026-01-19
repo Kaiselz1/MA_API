@@ -14,14 +14,15 @@ pip install -r requirements.txt
 
 ## Run App if no DB
 
-Make sure you have Python installed, then install the required packages:
+Command to Run the App, it also make the Database instance
 ```bash
 uvicorn main:app --reload
 ```
 
 ## For seeder
 
-Make sure you have Python installed, then install the required packages:
+Seeder to create testing data, change the BASE_URL in the file
+when working with different IP
 
 ```bash
 python -m utils.seeder

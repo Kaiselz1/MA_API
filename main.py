@@ -8,6 +8,7 @@ from api.user import user_router, user_model as model
 from api.auth import auth_router
 from api.product import product_router
 from api.category import category_router
+from api.order import order_router
 from utils import token_cleanup
 from api.favorite import favorite_routes 
 
