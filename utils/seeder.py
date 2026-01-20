@@ -6,10 +6,10 @@ from api.product import product_model
 db: Session = next(get_db())
 
 # for normal deployment, replace with actual domain
-BASE_URL = 'http://127.0.0.1:8000'
+# BASE_URL = 'http://127.0.0.1:8000'
 
 # for Android Emulator, use this instead
-# BASE_URL = 'http://10.0.2.2:8000'
+BASE_URL = 'http://10.0.2.2:8000'
 
 # Sample categories
 categories = [
