@@ -35,8 +35,9 @@ def register(request: auth_schema.UserSignupRequest, db: Session = Depends(get_d
 
 # Login User
 @router.post("/login", status_code=status.HTTP_200_OK)
-def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):       
-    user = db.query(user_model.User).filter(user_model.User.email == request.username).first()
+def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    email = request.username       
+    user = db.query(user_model.User).filter(user_model.User.email == email).first()
     if not user:
         print("User not found")
         raise HTTPException(
